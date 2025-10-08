@@ -5,56 +5,41 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Navigation Lab',
-      initialRoute: '/',
-      routes: {
-        '/': (context) => HomeScreen(),
-        '/details': (context) => DetailsScreen(),
-      },
-    );
+    return MaterialApp(title: 'Navigation Lab', home: FirstScreen());
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Home Screen')),
+      appBar: AppBar(title: Text('First Screen')),
       body: Center(
         child: ElevatedButton(
+          child: Text('Buka layar kedua'),
           onPressed: () {
-            Navigator.pushNamed(
+            Navigator.push(
               context,
-              '/details',
-              arguments: 'Data from Home Screen',
+              MaterialPageRoute(builder: (context) => SecondScreen()),
             );
           },
-          child: Text('Open Details'),
         ),
       ),
     );
   }
 }
 
-class DetailsScreen extends StatelessWidget {
+class SecondScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as String?;
-
     return Scaffold(
-      appBar: AppBar(title: Text('Details Screen')),
+      appBar: AppBar(title: Text('Second Screen')),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(args ?? 'No data received'),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('Back to Home'),
-            ),
-          ],
+        child: ElevatedButton(
+          child: Text('Kembali'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
     );
